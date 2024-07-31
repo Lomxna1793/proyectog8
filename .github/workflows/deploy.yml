@@ -18,7 +18,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.github_pages.outputs.url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,6 +34,8 @@ jobs:
         run: npm run build
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
+        with:
+          enablement: 'true'
       - name: Upload Dist Folder to GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
