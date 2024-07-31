@@ -48,7 +48,7 @@ jobs:
           enablement: 'true'
 
       - name: Upload Dist Folder to GitHub Pages
-        uses: actions/upload-pages-artifacts@v3
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
 
