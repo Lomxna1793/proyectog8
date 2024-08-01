@@ -1,10 +1,9 @@
-name: Deploy Vite Compiles Page to GitHub Pages
+name: Deploy Vite Compiles Page to Github Pages
 
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
@@ -16,42 +15,28 @@ concurrency:
 
 jobs:
   deploy:
-    environment:
+    enviroment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.github_pages.outputs.url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/checkout@v3
         with:
-          node-version: 20
+          node-versin: 20
           cache: 'npm'
-
       - name: Install Dependencies
         run: npm install
-
-      - name: Install Less
-        run: npm install -g less
-
-      - name: Compile Less
-        run: npm run build:css
-
       - name: Build
         run: npm run build
-
-      - name: Setup GitHub Pages
+      - name: Setup Github Pages
         uses: actions/configure-pages@v4
-        with:
-          enablement: 'true'
-
-      - name: Upload Dist Folder to GitHub Pages
+      - name: Upload Dist Folder to Github Pagea
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
-
-      - name: Deploy to GitHub Pages
+      - name: Deploy to Githib Pages
         id: deployment
         uses: actions/deploy-pages@v4
