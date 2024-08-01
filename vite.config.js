@@ -12,6 +12,11 @@ export default defineConfig({
     base: "/proyectog8/",
     build: {
         rollupOptions: {
+            external: [
+                '/js/menu.js',
+                '/js/lightbox.js',
+                '/js/questions.js'
+              ],
             input: Object.fromEntries(
                 [...glob.sync('./!(dist)/*.html').map(file => [
                     file.slice(0, file.length - path.extname(file).length), resolve(__dirname, file)
